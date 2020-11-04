@@ -1,10 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const WilderModel = require("./models/Wilder");
-const wilderController = require("./controllers/wilder")
 const app = express();
+const wilderRouter = require("./routers/wilder.router");
 
 app.use(express.json());
+app.use("/api/wilders", wilderRouter);
+
 
 //Database
 mongoose
@@ -20,12 +21,6 @@ mongoose
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
-
-app.get("/api/wilder", wilderController.getAll);
-app.get("/api/wilder/:wilderId", wilderController.getById);
-app.post("/api/wilder", wilderController.create);
-app.delete("/api/wilder/:wilderId", wilderController.deleteWilderById);
-app.put("/api/wilder/:wilderId", wilderController.updateById)
 
 
 
