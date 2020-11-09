@@ -1,11 +1,11 @@
-const express = require("express");
-const mongoose = require("mongoose");
+import express from "express";
+
+import mongoose, { Error } from "mongoose";
 const app = express();
-const wilderRouter = require("./routers/wilder.router");
+import wilderRouter from "./routers/wilder.router";
 
 app.use(express.json());
 app.use("/api/wilders", wilderRouter);
-
 
 //Database
 mongoose
@@ -16,15 +16,15 @@ mongoose
     autoIndex: true,
   })
   .then(() => console.log("connected database"))
-  .catch((err) => console.error(err));
+  .catch((err: Error) => console.error(err));
 
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
-
-
 const portServer = 4000;
 app.listen(portServer, () => {
   console.log(`Server is listening on ${portServer}`);
 });
+
+
